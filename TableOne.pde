@@ -1,9 +1,9 @@
 class TableOne {
-  public int CustomerID;
-  public String Name;
-  public String Address;
+  public int UserID;
+  public String Username;
+  public String Password;
   
   public String toString () {
-    return String.format("CustomerID: %s   Name: %s   Address: %s", CustomerID, Name, Address);
+    return String.format("UserID: %s   Username: %s   Password: %s", UserID, Username, Password);
   }
 }
