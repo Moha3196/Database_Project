@@ -1,8 +1,9 @@
 class TableOne {
-  public String fieldOne;
-  public int fieldTwo;
-
+  public int CustomerID;
+  public String Name;
+  public String Adress;
+  
   public String toString () {
-    return String.format("fieldOne: %s fieldTwo: %d", fieldOne, fieldTwo);
+    return String.format("CustomerID: %d Name: %s Adress: %s", CustomerID, Name, Adress);
   }
 }

@@ -6,7 +6,7 @@ SQLite db;
 void setup() {
   size(100,100);
   
-  db = new SQLite( this, "test.db" );  // open database file
+  db = new SQLite( this, "SQLite Database-projekt.db" );  // open database file
   
   if ( db.connect() ) {
     String[] tableNames = db.getTableNames();
