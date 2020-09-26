@@ -7,8 +7,7 @@ SQLite db;
 int screen = 1;
 String username = "";
 String password = "";
-boolean isUsernameFinished = false;
-boolean isPasswordFinished = false;
+boolean isUsernameFinished, isPasswordFinished = false;
 PFont font;
 String test;
 
@@ -45,6 +44,8 @@ void draw() {
   }
 }
 
+
+
 void keyPressed() {
   final int k = keyCode;
   if (screen == 1) {
@@ -79,7 +80,8 @@ void keyReleased() {
   if (k == TAB && !isUsernameFinished) { 
     isUsernameFinished = true;
     isPasswordFinished = true;
-  } else if (k == TAB && isUsernameFinished == true) { 
+  }
+  else if (k == TAB && isUsernameFinished == true) { 
     isUsernameFinished = false;
     isPasswordFinished = false;
   }
