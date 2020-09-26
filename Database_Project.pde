@@ -1,3 +1,7 @@
+
+/*keyCode = 157 For Mac CMD/Command*/
+/*keyCode = 20 For Capslock*/
+
 import de.bezier.data.sql.*;
 SQLite db;
 int screen = 1;
@@ -6,6 +10,7 @@ String password = "";
 boolean isUsernameFinished = false;
 boolean isPasswordFinished = false;
 PFont font;
+String test;
 
 
 
@@ -23,6 +28,7 @@ void setup() {
       TableOne t = new TableOne();
       db.setFromRow( t );
       println( t );
+      test = t.Username;
     }
   }
 }
@@ -30,55 +36,39 @@ void setup() {
 
 
 void draw() {
-  background(255);
-  textAlign(LEFT);
-  font = createFont("Verdana", 20);
-  textFont(font);
-  stroke(0);
-  strokeWeight(2);
-  fill(0);
-  text("Username", width/6-70, height/3-27.5);
-  fill(255);
-  rect(width/4, height/3-50, width/2, 30);
-  fill(0);
-  text("Password", width/6-70, height/3+10);
-  fill(255);
-  rect(width/4, height/3-12.5, width/2, 30);
-  fill(0);
-  text(username, width/4+5, height/3-48.5, width/2-10, 30);
-  fill(0);
-  text(password, width/4+5, height/3-12.5, width/2-10, 30);
+  //Changes the screens
+  if (screen == 1) {
+    LogIn();
+    if (keyPressed && keyCode == ENTER) {
+      screen = 2;
+    }
+  }
 }
 
 void keyPressed() {
   final int k = keyCode;
   if (screen == 1) {
     //Username
-    if (!isUsernameFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB) {
+    if (!isUsernameFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
+                            && keyCode != 157 && keyCode != 20 && username.length() <= 12) {
       username += key;
     }
     
-    if (k == BACKSPACE && !isUsernameFinished) {
-      try {
-        username = username.substring(0, username.length()-1);
-      }
-      catch(Exception e) {
-      }
-    }
-
-
+    if (!isUsernameFinished && k == BACKSPACE) {
+      try {username = username.substring(0, username.length()-1);}
+      catch(Exception e) {}
+     }
+    
     //Password
-    if (isPasswordFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB) {
+    if (isPasswordFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
+                           && keyCode != 157 && keyCode != 20 && password.length() <= 12) {
       password += key;
       println(password);
     }
-    
-    if (k == BACKSPACE && isPasswordFinished == true) {
-      try {
-        password = password.substring(0, password.length()-1);
-      }
-      catch(Exception e) {
-      }
+
+    if (isPasswordFinished && k == BACKSPACE) {
+      try {password = password.substring(0, password.length()-1);}
+      catch(Exception e) {}
     }
   }
 }
