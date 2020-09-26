@@ -53,7 +53,8 @@ void keyPressed() {
       password += key;
       //println(password);
     }
-
+    
+    //"For deleting"   - Cpt. Obvious
     if (isPasswordFinished && k == BACKSPACE) {
       try {
         password = password.substring(0, password.length()-1);
