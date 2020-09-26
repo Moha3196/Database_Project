@@ -1,7 +1,7 @@
 
 /*keyCode = 157 For Mac CMD/Command*/
 /*keyCode = 20 For Capslock*/
-
+import static javax.swing.JOptionPane.*;
 import de.bezier.data.sql.*;
 SQLite db;
 int screen = 1;
@@ -15,21 +15,8 @@ String test;
 
 void setup() {
   size(500, 300);
-
+  
   db = new SQLite( this, "SQLite Database-projekt.db" );  // open database file
-
-  if ( db.connect() ) {
-    String[] tableNames = db.getTableNames();
-
-    db.query( "SELECT * FROM %s", tableNames[0] );
-
-    while (db.next()) {
-      TableOne t = new TableOne();
-      db.setFromRow( t );
-      println( t );
-      test = t.Username;
-    }
-  }
 }
 
 
@@ -38,9 +25,6 @@ void draw() {
   //Changes the screens
   if (screen == 1) {
     LogIn();
-    if (keyPressed && keyCode == ENTER) {
-      screen = 2;
-    }
   }
 }
 
@@ -51,38 +35,60 @@ void keyPressed() {
   if (screen == 1) {
     //Username
     if (!isUsernameFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
-                            && keyCode != 157 && keyCode != 20 && username.length() <= 12) {
+      && keyCode != 157 && keyCode != 20 && username.length() <= 12) {
       username += key;
     }
-    
+
     if (!isUsernameFinished && k == BACKSPACE) {
-      try {username = username.substring(0, username.length()-1);}
-      catch(Exception e) {}
-     }
-    
+      try {
+        username = username.substring(0, username.length()-1);
+      }
+      catch(Exception e) {
+      }
+    }
+
     //Password
     if (isPasswordFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
-                           && keyCode != 157 && keyCode != 20 && password.length() <= 12) {
+      && keyCode != 157 && keyCode != 20 && password.length() <= 12) {
       password += key;
-      println(password);
+      //println(password);
     }
 
     if (isPasswordFinished && k == BACKSPACE) {
-      try {password = password.substring(0, password.length()-1);}
-      catch(Exception e) {}
+      try {
+        password = password.substring(0, password.length()-1);
+      }
+      catch(Exception e) {
+      }
+    }
+
+    if (k == ENTER) {
+      // If thre is connection to database, proceed with checking user input.
+      if (db.connect()) {
+        if (CheckLogIn(username, password)) {
+          // If CheckLogIn returns true in case of correct user input, the program navigates to next screen.
+          println("You have successfully logged in!");
+          //screen = 2;
+        } else {
+          println("FAILED LOG-IN");
+          // Shows a message dialog for when user input is incorrect.
+          showMessageDialog(null, "The provided login credentials are not correct!", "Login error", ERROR_MESSAGE);
+        }
+      }
     }
   }
 }
 
 void keyReleased() {
   final int k = keyCode;
-  //Switch to Password 
-  if (k == TAB && !isUsernameFinished) { 
-    isUsernameFinished = true;
-    isPasswordFinished = true;
-  }
-  else if (k == TAB && isUsernameFinished == true) { 
-    isUsernameFinished = false;
-    isPasswordFinished = false;
+  if (screen == 1) {
+    //Switch to Password 
+    if (k == TAB && !isUsernameFinished) { 
+      isUsernameFinished = true;
+      isPasswordFinished = true;
+    } else if (k == TAB && isUsernameFinished == true) { 
+      isUsernameFinished = false;
+      isPasswordFinished = false;
+    }
   }
 }

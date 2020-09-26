@@ -1,7 +1,7 @@
 
 void LogIn() {
   background(255);
-  println(test);
+  
   textAlign(LEFT);
   font = createFont("Verdana", 20);
   textFont(font);
