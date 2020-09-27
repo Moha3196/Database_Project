@@ -1,12 +1,12 @@
 public boolean CheckLogIn(String usernameInput, String passwordInput) {
 
   db.query("SELECT * FROM Users WHERE Username = '%s'", usernameInput);
-
+  
   while (db.next()) {
-    TableOne t = new TableOne();
-    db.setFromRow( t );
     
-    if (t.Username.equals(usernameInput) && t.Password.equals(passwordInput)) { 
+    db.setFromRow(user);
+    
+    if (user.Username.equals(usernameInput) && user.Password.equals(passwordInput)) {  
       return true;
     }
   }

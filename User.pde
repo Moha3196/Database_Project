@@ -1,4 +1,4 @@
-class TableOne {
+class User {
   public int UserID;
   public String Username;
   public String Password;
