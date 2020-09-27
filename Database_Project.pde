@@ -14,7 +14,7 @@ String test;
 
 
 void setup() {
-  size(500, 300);
+  size(1000, 600);
   
   db = new SQLite( this, "SQLite Database-projekt.db" );  // open database file
 }
@@ -35,7 +35,7 @@ void keyPressed() {
   if (screen == 1) {
     //Username
     if (!isUsernameFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
-      && keyCode != 157 && keyCode != 20 && username.length() <= 12) {
+      && k != UP && k != LEFT && k != DOWN && k != RIGHT && keyCode != 157 && keyCode != 20 && username.length() <= 18) {
       username += key;
     }
 
@@ -49,7 +49,7 @@ void keyPressed() {
 
     //Password
     if (isPasswordFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
-      && keyCode != 157 && keyCode != 20 && password.length() <= 12) {
+      && k != UP && k != LEFT && k != DOWN && k != RIGHT && keyCode != 157 && keyCode != 20 && password.length() <= 18) {
       password += key;
       //println(password);
     }
