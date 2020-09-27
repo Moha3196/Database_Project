@@ -35,7 +35,7 @@ void keyPressed() {
   if (screen == 1) {
     //Username
     if (!isUsernameFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
-      && k != UP && k != LEFT && k != DOWN && k != RIGHT && keyCode != 157 && keyCode != 20 && username.length() <= 18) {
+      && k != 0 && k != UP && k != LEFT && k != DOWN && k != RIGHT && k != 157 && k != 20 && username.length() <= 18) {
       username += key;
     }
 
@@ -49,7 +49,7 @@ void keyPressed() {
 
     //Password
     if (isPasswordFinished && k != BACKSPACE && k != CONTROL && k != SHIFT && k != ALT && k != ENTER && k != TAB 
-      && k != UP && k != LEFT && k != DOWN && k != RIGHT && keyCode != 157 && keyCode != 20 && password.length() <= 18) {
+       && k != 0 && k != UP && k != LEFT && k != DOWN && k != RIGHT && k != 157 && k != 20 && password.length() <= 18) {
       password += key;
       //println(password);
     }
