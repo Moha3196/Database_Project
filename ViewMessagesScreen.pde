@@ -1,6 +1,7 @@
 
 
 void ViewMessagesScreen() {
+  for(int i = 0; i <= 0; i++){}
   background(255);
 
   textAlign(LEFT);

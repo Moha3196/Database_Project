@@ -12,6 +12,7 @@ String password = "";
 String messageInput = "";
 String recieverInput = "";
 String viewMessage = ""; 
+int ST = 0;
 boolean isPasswordHighlighted, isProceedButtonHighlighted = false; 
 boolean isViewMessageProceedButtonHighlighted, isMessageProceedButtonHighlighted, isMessageHighlighted = false;
 boolean isUsernameHighlighted = true, isRecieverHighlighted = true;
@@ -37,22 +38,21 @@ void draw() {
 
   if (screen == 2) {
     ViewMessagesScreen();
-    //time = millis();
-    if ((millis() - time) < 10) {
-      if (db.connect()) {        
-        for (int i = LoadMessagesFromDB().size()-4; i <= LoadMessagesFromDB().size(); i++) {
+    int i = LoadMessagesFromDB().size()-4;
+    if (ST < 4) {
+      if (db.connect()) { 
+        while (ST < 4) {
+          //for (int i = LoadMessagesFromDB().size()-1; i < LoadMessagesFromDB().size(); i++) {
           //ReadMessage message = LoadMessagesFromDB().get(i);
           try {
             viewMessage += LoadMessagesFromDB().get(i).SenderName + " -> " + LoadMessagesFromDB().get(i).RecieverName + "\n" + LoadMessagesFromDB().get(i).Message + "\n" + "\n";
           } 
           catch (Exception e) {
           }
+          i++;
+          ST += 1;
         }
-      } else {
-        viewMessage = "Restart the program. It Occurres that Messages didnt load.";
       }
-      //time = millis();
-      //noLoop();
     }
   }
 
