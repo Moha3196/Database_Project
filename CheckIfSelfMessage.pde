@@ -18,7 +18,7 @@ public boolean CheckIfSelfMessage(String usernameInput) {
         showMessageDialog(null, "You cant send a message to yourself", "Error in Message", ERROR_MESSAGE);
         return false;
       } else {
-        println("AAAAAAAAAAAAA");
+        //println("AAAAAAAAAAAAA");
         return true;
       }
     }
