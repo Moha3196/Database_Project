@@ -5,15 +5,23 @@
 import static javax.swing.JOptionPane.*;
 import de.bezier.data.sql.*;
 SQLite db;
-int screen = 1;
+ArrayList<User> contactListArray = new ArrayList<User>();
 //int time = 0;
+int screen = 1;
 String username = ""; 
 String password = ""; 
 String messageInput = "";
 String recieverInput = "";
 String viewMessage = ""; 
-int ST = 0;
-boolean isPasswordHighlighted, isProceedButtonHighlighted = false; 
+
+String encryptedPassword = "";
+String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+char[] alphabetCharCount = new char[50+1];
+int letterShift = 4;
+int iii;
+
+int amountMessagesShown  = 0;
+boolean isPasswordHighlighted, isProceedButtonHighlighted, isDropdownListPressed = false; 
 boolean isViewMessageProceedButtonHighlighted, isMessageProceedButtonHighlighted, isMessageHighlighted = false;
 boolean isUsernameHighlighted = true, isRecieverHighlighted = true;
 PFont font;
@@ -39,9 +47,9 @@ void draw() {
   if (screen == 2) {
     ViewMessagesScreen();
     int i = LoadMessagesFromDB().size()-4;
-    if (ST < 4) {
+    if (amountMessagesShown < 4) {
       if (db.connect()) { 
-        while (ST < 4) {
+        while (amountMessagesShown < 4) {
           //for (int i = LoadMessagesFromDB().size()-1; i < LoadMessagesFromDB().size(); i++) {
           //ReadMessage message = LoadMessagesFromDB().get(i);
           try {
@@ -50,7 +58,7 @@ void draw() {
           catch (Exception e) {
           }
           i++;
-          ST += 1;
+          amountMessagesShown += 1;
         }
       }
     }
@@ -106,6 +114,11 @@ void keyPressed() {
           isProceedButtonHighlighted = false;
           isPasswordHighlighted = false;
           isUsernameHighlighted = true;
+          contactListArray = LoadContactListFromDB();
+          
+          
+          //println(password);
+          //println(contactListArray);
           //time = millis();
         }
       } else {
@@ -146,6 +159,12 @@ void keyPressed() {
       }
       catch(Exception e) {
       }
+    }
+
+    //Show Dropdown
+    if (k == ENTER && isRecieverHighlighted) {
+      isRecieverHighlighted = false;
+      isDropdownListPressed = true;
     }
   }
 }
@@ -198,7 +217,7 @@ void keyReleased() {
     //Send Message
     if (k == ENTER && isMessageProceedButtonHighlighted) {
       if (db.connect()) {
-        if (CheckIfSelfMessage(recieverInput)) {
+        if (CheckReciever(recieverInput)) {
           // If CheckLogIn returns true in case of correct user input, the program navigates to next screen.
           showMessageDialog(null, "Your message has been successfully delivered!", "Message Sent", INFORMATION_MESSAGE);
           SendMessageToDB(user, recieveUser, messageInput);
@@ -210,7 +229,7 @@ void keyReleased() {
           isMessageProceedButtonHighlighted = false;
           isRecieverHighlighted = true;
           //time = millis();
-          ST = 0;
+          amountMessagesShown = 0;
         }
       }
     }
@@ -239,17 +258,17 @@ void mousePressed() {
   }
 
   if (screen == 3) {
-    if (mouseX >= width/4 && mouseX <= width/4*3 && mouseY >= height/4-50 && mouseY <= height/4-20) {
+    if (mouseX >= width/4 && mouseX <= width/4*3 && mouseY >= height/4-50 && mouseY <= height/4-20 && isDropdownListPressed == false) {
       //Switch to Username 
       isMessageProceedButtonHighlighted = false;
       isMessageHighlighted = false;
       isRecieverHighlighted = true;
-    } else if (mouseX >= width/4 && mouseX <= width/4*3 && mouseY >= height/4+17.5 && mouseY <= height/12*11-32.5) {
+    } else if (mouseX >= width/4 && mouseX <= width/4*3 && mouseY >= height/4+17.5 && mouseY <= height/12*11-32.5 && isDropdownListPressed == false) {
       //Switch to Message 
       isRecieverHighlighted = false;
       isMessageHighlighted = true;
       isMessageProceedButtonHighlighted = false;
-    } else if (mouseX >= width/4*3-60 && mouseX <= width/4*3+60 && mouseY >= height-50 && mouseY <= height-20) {
+    } else if (mouseX >= width/4*3-60 && mouseX <= width/4*3+60 && mouseY >= height-50 && mouseY <= height-20 && isDropdownListPressed == false) {
       //Switch to Proceed Button  
       isMessageHighlighted = false;
       isRecieverHighlighted = false;

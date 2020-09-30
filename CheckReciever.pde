@@ -1,5 +1,5 @@
 
-public boolean CheckIfSelfMessage(String usernameInput) {
+public boolean CheckReciever(String usernameInput) {
 
   db.query("SELECT * FROM Users WHERE Username = '%s'", usernameInput);
 
