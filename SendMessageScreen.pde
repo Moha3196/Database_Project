@@ -2,18 +2,24 @@
 void SendMessageScreen(){
   background(255);
   
+  textAlign(LEFT);
+  font = createFont("Verdana", 20);
+  textFont(font);
+  stroke(0);
+  strokeWeight(2);
+  
   //Text box for Username
   fill(0);
   text("To:", width/4, height/4-57.5);
   //Higlight Reciever Box
-  if (isRecieverFinished) { fill(220); } else { fill(255); }
+  if (isRecieverHighlighted) { fill(220); } else { fill(255); }
   rect(width/4, height/4-50, width/2, 30);
   
   //Text box for Message
   fill(0);
   text("Message:", width/4, height/4+7.5);
   //Higlight Message Box
-  if (isMessageFinished){ fill(220); } else { fill(255); }
+  if (isMessageHighlighted){ fill(220); } else { fill(255); }
   rect(width/4, height/4+17.5, width/2, height/3*2-50);
   
   //Text box for Proceed Button
