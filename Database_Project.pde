@@ -6,7 +6,7 @@ import static javax.swing.JOptionPane.*;
 import de.bezier.data.sql.*;
 SQLite db;
 int screen = 1;
-int time = 0;
+//int time = 0;
 String username = ""; 
 String password = ""; 
 String messageInput = "";
@@ -106,7 +106,7 @@ void keyPressed() {
           isProceedButtonHighlighted = false;
           isPasswordHighlighted = false;
           isUsernameHighlighted = true;
-          time = millis();
+          //time = millis();
         }
       } else {
         println("FAILED LOG-IN");
@@ -209,7 +209,8 @@ void keyReleased() {
           isMessageHighlighted = false;
           isMessageProceedButtonHighlighted = false;
           isRecieverHighlighted = true;
-          time = millis();
+          //time = millis();
+          ST = 0;
         }
       }
     }
