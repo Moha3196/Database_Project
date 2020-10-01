@@ -2,15 +2,16 @@ public boolean CheckLogIn(String usernameInput, String passwordInput) {
   passwordInput = Encryption(passwordInput);
 
   db.query("SELECT * FROM Users WHERE Username = '%s'", usernameInput);
-
-  while (db.next()) {
-
+  
+  
+    while (db.next()) {
+    
     db.setFromRow(user);
-    //user.Password = Encryption(user.Password);
-    //println(user.Password);
-    if (user.Username.equals(usernameInput) && user.Password.equals(passwordInput)) {        
+    println(user.Username.equals(usernameInput), user.Password.equals(passwordInput));
+    if (user.Username.equals(usernameInput) && user.Password.equals(passwordInput)) {
       return true;
-    } else if (user.Password.equals(passwordInput) &! user.Username.equals(usernameInput)) {
+    } 
+    /*if (user.Password.equals(passwordInput) &&  user.Username.equals("0")) {
       println("FAILED LOG-IN");
       // Shows a message dialog for when user input is incorrect.
       showMessageDialog(null, "The provided login credentials are not correct!", "Login error", ERROR_MESSAGE);
@@ -21,6 +22,7 @@ public boolean CheckLogIn(String usernameInput, String passwordInput) {
       showMessageDialog(null, "The provided login credentials are not correct!", "Login error", ERROR_MESSAGE);
       return false;
     }
+    */
   }
 
   return false;
