@@ -11,3 +11,8 @@ public ArrayList<User> LoadContactListFromDB() {
 
   return contactListArray;
 }
+
+//Create User
+void CreateUser(String userToBeCreated, String passwordToBeCreated) {
+  db.query("INSERT INTO Users (Username, Password) VALUES ('%s', '%s')", userToBeCreated, passwordToBeCreated); 
+}

@@ -28,6 +28,12 @@ void LogIn() {
   fill(0);
   text("Log In", width/4*3-67.5, height/3*2, 120, 30);
   
+  //Text box for Sign Up Button
+  if (isSignUpButtonHighlighted == true){ fill(220); } else { fill(255); }
+  rect(width/4*3-170, height/3*2, 85, 30);
+  fill(0);
+  text("Sign Up", width/4*3-167.5, height/3*2, 120, 30);
+  
   //The Text in Username
   fill(0);
   text(username, width/4+5, height/3-48.5, width/2-10, 30);

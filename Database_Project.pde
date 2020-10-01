@@ -13,15 +13,13 @@ String password = "";
 String messageInput = "";
 String recieverInput = "";
 String viewMessage = ""; 
-
 String encryptedPassword = "";
 String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char[] alphabetCharCount = new char[50+1];
 int letterShift = 4;
 int iii;
-
 int amountMessagesShown  = 0;
-boolean isPasswordHighlighted, isProceedButtonHighlighted, isDropdownListPressed = false; 
+boolean isPasswordHighlighted, isProceedButtonHighlighted, isSignUpButtonHighlighted, isDropdownListPressed = false; 
 boolean isViewMessageProceedButtonHighlighted, isMessageProceedButtonHighlighted, isMessageHighlighted = false;
 boolean isUsernameHighlighted = true, isRecieverHighlighted = true;
 PFont font;
@@ -115,8 +113,8 @@ void keyPressed() {
           isPasswordHighlighted = false;
           isUsernameHighlighted = true;
           contactListArray = LoadContactListFromDB();
-          
-          
+
+
           //println(password);
           //println(contactListArray);
           //time = millis();
@@ -172,18 +170,46 @@ void keyPressed() {
 void keyReleased() {
   final int k = keyCode;
   if (screen == 1) {
-    if (k == TAB && isUsernameHighlighted) { 
+    if (k == TAB && isProceedButtonHighlighted) {
+      //Switch to Username 
+      isUsernameHighlighted = true;
+      isPasswordHighlighted = false;
+      isSignUpButtonHighlighted = false;
+      isProceedButtonHighlighted = false;
+    } else if (k == TAB && isUsernameHighlighted) { 
       //Switch to Password 
       isUsernameHighlighted = false;
       isPasswordHighlighted = true;
-    } else if (k == TAB && isPasswordHighlighted) {
-      //Switch to Proceed Button 
-      isProceedButtonHighlighted = true;
-      isPasswordHighlighted = false;
-    } else if (k == TAB && isProceedButtonHighlighted) {
-      //Switch to Username 
+      isSignUpButtonHighlighted = false;
       isProceedButtonHighlighted = false;
-      isUsernameHighlighted = true;
+    } else if (k == TAB && isPasswordHighlighted) {
+      //Switch to Username 
+      isUsernameHighlighted = false;
+      isPasswordHighlighted = false;
+      isSignUpButtonHighlighted = true;
+      isProceedButtonHighlighted = false;
+    } else if (k == TAB && isSignUpButtonHighlighted) {
+      //Switch to Proceed Button 
+      isUsernameHighlighted = false;
+      isPasswordHighlighted = false;
+      isSignUpButtonHighlighted = false;
+      isProceedButtonHighlighted = true;
+    } 
+
+    if (k == ENTER && isSignUpButtonHighlighted) {
+      if (db.connect()) {
+        if (CheckCreatedUsername(username)) {
+          //Switch to Proceed Button 
+          isUsernameHighlighted = true;
+          isPasswordHighlighted = false;
+          isSignUpButtonHighlighted = false;
+          isProceedButtonHighlighted = false;
+          password = Encryption(password);
+          CreateUser(username, password);
+          username = "";
+          password = "";
+        }
+      }
     }
   }
 
