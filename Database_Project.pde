@@ -4,6 +4,7 @@
 /*keyCode = 0 For FN*/
 import static javax.swing.JOptionPane.*;
 import de.bezier.data.sql.*;
+import java.security.*;
 SQLite db;
 ArrayList<User> contactListArray = new ArrayList<User>();
 //int time = 0;
@@ -14,6 +15,7 @@ String messageInput = "";
 String recieverInput = "";
 String viewMessage = ""; 
 String encryptedPassword = "";
+String encryptedMessage = "";
 String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 char[] alphabetCharCount = new char[50+1];
 int letterShift = 4;
@@ -191,7 +193,7 @@ void keyReleased() {
           isPasswordHighlighted = false;
           isSignUpButtonHighlighted = false;
           isProceedButtonHighlighted = false;
-          password = Encryption(password);
+          password = encryptPassword(password);
           CreateUser(username, password);
           username = "";
           password = "";
