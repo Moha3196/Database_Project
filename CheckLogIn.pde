@@ -11,18 +11,6 @@ public boolean CheckLogIn(String usernameInput, String passwordInput) {
     if (user.Username.equals(usernameInput) && user.Password.equals(passwordInput)) {
       return true;
     } 
-    /*if (user.Password.equals(passwordInput) &&  user.Username.equals("0")) {
-      println("FAILED LOG-IN");
-      // Shows a message dialog for when user input is incorrect.
-      showMessageDialog(null, "The provided login credentials are not correct!", "Login error", ERROR_MESSAGE);
-      return false;
-    } else if (user.Username.equals(usernameInput) &! user.Password.equals(passwordInput)) {
-      println("FAILED LOG-IN");
-      // Shows a message dialog for when user input is incorrect.
-      showMessageDialog(null, "The provided login credentials are not correct!", "Login error", ERROR_MESSAGE);
-      return false;
-    }
-    */
   }
 
   return false;

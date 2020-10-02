@@ -23,6 +23,8 @@ boolean isPasswordHighlighted, isProceedButtonHighlighted, isSignUpButtonHighlig
 boolean isViewMessageProceedButtonHighlighted, isMessageProceedButtonHighlighted, isMessageHighlighted = false;
 boolean isUsernameHighlighted = true, isRecieverHighlighted = true;
 PFont font;
+PFont font1;
+PFont font2;
 User user = new User();
 User recieveUser = new User(); 
 
@@ -44,22 +46,7 @@ void draw() {
 
   if (screen == 2) {
     ViewMessagesScreen();
-    int i = LoadMessagesFromDB().size()-4;
-    if (amountMessagesShown < 4) {
-      if (db.connect()) { 
-        while (amountMessagesShown < 4) {
-          //for (int i = LoadMessagesFromDB().size()-1; i < LoadMessagesFromDB().size(); i++) {
-          //ReadMessage message = LoadMessagesFromDB().get(i);
-          try {
-            viewMessage += LoadMessagesFromDB().get(i).SenderName + " -> " + LoadMessagesFromDB().get(i).RecieverName + "\n" + LoadMessagesFromDB().get(i).Message + "\n" + "\n";
-          } 
-          catch (Exception e) {
-          }
-          i++;
-          amountMessagesShown += 1;
-        }
-      }
-    }
+    
   }
 
   if (screen == 3) {
@@ -118,11 +105,11 @@ void keyPressed() {
           //println(password);
           //println(contactListArray);
           //time = millis();
+        } else {
+          println("FAILED LOG-IN");
+          // Shows a message dialog for when user input is incorrect.
+          showMessageDialog(null, "The provided login credentials are not correct!", "Login error", ERROR_MESSAGE);
         }
-      } else {
-        println("FAILED LOG-IN");
-        // Shows a message dialog for when user input is incorrect.
-        showMessageDialog(null, "The provided login credentials are not correct!", "Login error", ERROR_MESSAGE);
       }
     }
   }
