@@ -24,9 +24,8 @@ int amountMessagesShown  = 0;
 boolean isPasswordHighlighted, isProceedButtonHighlighted, isSignUpButtonHighlighted, isDropdownListPressed = false; 
 boolean isViewMessageProceedButtonHighlighted, isMessageProceedButtonHighlighted, isMessageHighlighted = false;
 boolean isUsernameHighlighted = true, isRecieverHighlighted = true;
-PFont font;
-PFont font1;
-PFont font2;
+PFont font, font1, font2;
+
 User user = new User();
 User recieveUser = new User(); 
 

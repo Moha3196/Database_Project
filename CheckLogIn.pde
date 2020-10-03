@@ -1,5 +1,6 @@
 public boolean CheckLogIn(String usernameInput, String passwordInput) {
-  passwordInput = encryptMessage(messageInput);
+  passwordInput = encryptPassword(passwordInput);
+  messageInput = encryptMessage(messageInput);
 
   db.query("SELECT * FROM Users WHERE Username = '%s'", usernameInput);
 
@@ -69,11 +70,12 @@ public String encryptPassword(String pw) {
     for (byte b : byteList)hashedValueBuffer.append(hex(b)); 
 
     //Her udskrives den oprindelige tekst
-    println("Den orindelige tekst: "+ password);
+      //println("Den orindelige tekst: "+ password);
     //Her udskrives "hash-værdien" af teksten
-    println("SHA-256 værdien af teksten: " +hashedValueBuffer.toString());
+      //println("SHA-256 værdien af teksten: " +hashedValueBuffer.toString());
     encryptedPassword = hashedValueBuffer.toString();
     
+    println("Encrypted password is: " + encryptedPassword);
     return encryptedPassword;
   }
   catch (Exception e) {
