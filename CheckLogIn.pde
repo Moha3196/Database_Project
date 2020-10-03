@@ -13,7 +13,9 @@ public boolean CheckLogIn(String usernameInput, String passwordInput) {
       return true;
     }
   }
-
+  println("Password in the database: " + user.Password);
+  println("Written password: " + password);
+  println("username: " + usernameInput + "   password: " + passwordInput);
   return false;
 }
 
@@ -70,9 +72,9 @@ public String encryptPassword(String pw) {
     for (byte b : byteList)hashedValueBuffer.append(hex(b)); 
 
     //Her udskrives den oprindelige tekst
-      //println("Den orindelige tekst: "+ password);
+      println("Den orindelige tekst: "+ password);
     //Her udskrives "hash-værdien" af teksten
-      //println("SHA-256 værdien af teksten: " +hashedValueBuffer.toString());
+      println("SHA-256 værdien af teksten: " +hashedValueBuffer.toString());
     encryptedPassword = hashedValueBuffer.toString();
     
     println("Encrypted password is: " + encryptedPassword);
@@ -80,8 +82,9 @@ public String encryptPassword(String pw) {
   }
   catch (Exception e) {
     System.out.println("Exception: "+e);
+    return pw;
   }
-  return pw;
+  
 }
 
 
