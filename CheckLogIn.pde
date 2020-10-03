@@ -8,14 +8,11 @@ public boolean CheckLogIn(String usernameInput, String passwordInput) {
   while (db.next()) {
 
     db.setFromRow(user);
-    println(user.Username.equals(usernameInput), user.Password.equals(passwordInput));
+    //println(user.Username.equals(usernameInput), user.Password.equals(passwordInput));
     if (user.Username.equals(usernameInput) && user.Password.equals(passwordInput)) {
       return true;
     }
   }
-  println("Password in the database: " + user.Password);
-  println("Written password: " + password);
-  println("username: " + usernameInput + "   password: " + passwordInput);
   return false;
 }
 
@@ -72,12 +69,12 @@ public String encryptPassword(String pw) {
     for (byte b : byteList)hashedValueBuffer.append(hex(b)); 
 
     //Her udskrives den oprindelige tekst
-      println("Den orindelige tekst: "+ password);
+      //println("Den orindelige tekst: "+ password);
     //Her udskrives "hash-værdien" af teksten
-      println("SHA-256 værdien af teksten: " +hashedValueBuffer.toString());
+      //println("SHA-256 værdien af teksten: " +hashedValueBuffer.toString());
     encryptedPassword = hashedValueBuffer.toString();
     
-    println("Encrypted password is: " + encryptedPassword);
+    //println("Encrypted password is: " + encryptedPassword);
     return encryptedPassword;
   }
   catch (Exception e) {
@@ -107,5 +104,7 @@ public String encryptMessage(String ms) {
       }
     }
   }
+  //println("message = " + encryptedMessage);
+  //noLoop();
   return encryptedMessage;
 }
