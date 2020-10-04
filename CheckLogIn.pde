@@ -1,7 +1,6 @@
 public boolean CheckLogIn(String usernameInput, String passwordInput) {
   passwordInput = encryptPassword(passwordInput);
-  messageInput = encryptMessage(messageInput);
-
+  
   db.query("SELECT * FROM Users WHERE Username = '%s'", usernameInput);
 
 

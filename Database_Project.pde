@@ -234,6 +234,7 @@ void keyReleased() {
         if (CheckReciever(recieverInput)) {
           // If CheckLogIn returns true in case of correct user input, the program navigates to next screen.
           showMessageDialog(null, "Your message has been successfully delivered!", "Message Sent", INFORMATION_MESSAGE);
+          messageInput = encryptMessage(messageInput);
           SendMessageToDB(user, recieveUser, messageInput);
           screen = 2;
           viewMessage = "";
