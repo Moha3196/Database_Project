@@ -9,6 +9,8 @@ SQLite db;
 ArrayList<User> contactListArray = new ArrayList<User>();
 //int time = 0;
 int screen = 1;
+String[][][] userTable; //meant to store data from the Users table in the database. Length matches number of columns
+String[][][][] messageTable; //the same as the one above, but for Message table
 String username = ""; 
 String password = ""; 
 String messageInput = "";
